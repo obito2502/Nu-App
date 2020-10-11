@@ -21,24 +21,25 @@
         android:id="@+id/password_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="208dp"
         android:ems="10"
         android:hint="New Password"
         android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/email_text"
-        app:layout_constraintTop_toBottomOf="@+id/email_text" />
-
-    <EditText
-        android:id="@+id/email_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
-        android:ems="10"
-        android:hint="NU email"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/email_text"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="1dp"
+        android:ems="10"
+        android:hint="NU email"
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/password_text" />
 
     <Button
         android:id="@+id/register_button"
@@ -63,7 +64,7 @@
         android:id="@+id/student_club_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="34dp"
         android:layout_marginTop="19dp"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/confirm_password_text" />
@@ -86,5 +87,15 @@
         app:layout_constraintEnd_toEndOf="@+id/confirm_password_text"
         app:layout_constraintTop_toBottomOf="@+id/confirm_password_text"
         tools:text="Club" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="26dp"
+        android:text="@nu.edu.kz"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/password_text"
+        app:layout_constraintEnd_toEndOf="@+id/password_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

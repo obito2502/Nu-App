@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "836099291530",
+    "firebase_url": "https://nuapp-40c9c.firebaseio.com",
+    "project_id": "nuapp-40c9c",
+    "storage_bucket": "nuapp-40c9c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836099291530:android:5be2360b9074bdcc19f073",
+        "android_client_info": {
+          "package_name": "com.example.nu_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "836099291530-sckgp7t3cvu52fj433f61m5uh2ngud1q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nu_app",
+            "certificate_hash": "d9afd8543bac22a3e5e3da2a999a38f11f9b8aa4"
+          }
+        },
+        {
+          "client_id": "836099291530-dbq3t8gsi3d2cn2uls1a6s931sl6e0v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU72sPsGyjqjyg_ZfKLRWS7ndlkREDCkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "836099291530-dbq3t8gsi3d2cn2uls1a6s931sl6e0v8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
