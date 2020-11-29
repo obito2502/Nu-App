@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClubRegisterActivity">
+
+    <TextView
+        android:id="@+id/club_email"
+        android:layout_width="206dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="147dp"
+        android:layout_marginBottom="29dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/club_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/club_password"
+        android:layout_width="207dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="31dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/club_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/club_email" />
+
+    <EditText
+        android:id="@+id/club_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="23dp"
+        android:ems="10"
+        android:hint="Название Клуба"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/president_of_club"
+        app:layout_constraintStart_toStartOf="@+id/president_of_club"
+        app:layout_constraintTop_toBottomOf="@+id/club_password" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="176dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Описание Клуба"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/club_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/president_of_club" />
+
+    <Button
+        android:id="@+id/club_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="28dp"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <EditText
+        android:id="@+id/president_of_club"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="Президент клуба"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/description"
+        app:layout_constraintEnd_toEndOf="@+id/description"
+        app:layout_constraintTop_toBottomOf="@+id/club_name" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -83,7 +83,10 @@ public class HomePage extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         if (user != null) {
-            //
+            if(user.isEmailVerified() == false) {
+                startActivity(new Intent(HomePage.this, LoginActivity.class));
+                finish();
+            }
         } else {
             startActivity(new Intent(HomePage.this, LoginActivity.class));
             finish();
