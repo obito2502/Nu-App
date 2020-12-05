@@ -2,6 +2,7 @@ package com.example.nu_app;
 
 public class Club {
     String email, name, description, president;
+    int followers;
 
     public Club() {
 
@@ -12,6 +13,7 @@ public class Club {
         this.name = name;
         this.description = description;
         this.president = president;
+        this.followers = 0;
     }
 
     public String getEmail() {
@@ -44,5 +46,17 @@ public class Club {
 
     public void setPresident(String president) {
         this.president = president;
+    }
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
+    }
+
+    public void addFollower() {
+        this.followers++;
     }
 }

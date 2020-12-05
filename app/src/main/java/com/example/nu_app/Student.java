@@ -2,6 +2,7 @@ package com.example.nu_app;
 
 public class Student {
     String email, name, major;
+    String[] subscriptions;
 
     public Student() {
     }
@@ -10,6 +11,7 @@ public class Student {
         this.email = email;
         this.name = name;
         this.major = major;
+
     }
 
     public String getEmail() {
@@ -34,5 +36,17 @@ public class Student {
 
     public void setMajor(String major) {
         this.major = major;
+    }
+
+    public String[] getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(String[] subscriptions) {
+        this.subscriptions = subscriptions;
+    }
+
+    public void addSubscription(String club){
+        subscriptions[subscriptions.length + 1] = club;
     }
 }

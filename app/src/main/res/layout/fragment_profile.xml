@@ -31,5 +31,32 @@
         android:layout_marginTop="50dp"
         android:text="Logout" />
 
+    <Button
+        android:id="@+id/add_club_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="110dp"
+        android:visibility="invisible"
+        android:text="Add Clubs" />
+
+    <TextView
+        android:id="@+id/textCondition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="180dp"
+        android:text="TextView" />
+
 
 </FrameLayout>
