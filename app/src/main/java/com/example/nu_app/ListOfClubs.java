@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.nu_app.adapters.ClubAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +33,7 @@ import java.util.Map;
 public class ListOfClubs extends AppCompatActivity {
 
     private ListView listView;
-    private ArrayList<String> listOfClubs;
+    private ArrayList<Club> listOfClubs;
 
     private ArrayAdapter<String> listOfClubsAdapter;
 
@@ -44,11 +45,8 @@ public class ListOfClubs extends AppCompatActivity {
         setContentView(R.layout.activity_list_of_clubs);
 
         listView = (ListView)findViewById(R.id.list_of_clubs);
+        listOfClubs = new ArrayList<Club>();
 
-        listOfClubs = new ArrayList<String>();
-
-//        listOfClubsAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, listOfClubs);
-//        listView.setAdapter(listOfClubsAdapter);
 
         reference = FirebaseDatabase.getInstance().getReference("clubs");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -56,12 +54,13 @@ public class ListOfClubs extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                    Club club = childSnapshot.getValue(Club.class);
-                   System.out.println(club.getName());
-                   listOfClubs.add(club.getName());
+                   listOfClubs.add(club);
                 }
 
-                listOfClubsAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, listOfClubs);
-                listView.setAdapter(listOfClubsAdapter);
+                System.out.println("listOFClubs = " + listOfClubs);
+
+                ClubAdapter adapter = new ClubAdapter(getApplicationContext(), R.layout.row_clubs, listOfClubs);
+                listView.setAdapter(adapter);
 
             }
 

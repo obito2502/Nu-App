@@ -104,6 +104,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
                         } else {
                             // If sign in fails, display a message to the user.
+                            System.out.println(task.isSuccessful());
                             Toast.makeText(StudentRegisterActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }

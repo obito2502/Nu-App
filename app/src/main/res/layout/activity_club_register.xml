@@ -3,50 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     tools:context=".ClubRegisterActivity">
 
     <TextView
         android:id="@+id/club_email"
-        android:layout_width="206dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="147dp"
-        android:layout_marginBottom="29dp"
+        android:layout_width="210dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="91dp"
+        android:layout_marginBottom="12dp"
+        android:background="#DD0F0F"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/club_password"
+        app:layout_constraintBottom_toTopOf="@+id/club_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/club_password"
-        android:layout_width="207dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="31dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/club_name"
+    <EditText
+        android:id="@+id/club_name"
+        android:layout_width="210dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="29dp"
+        android:background="#DD0F"
+        android:ems="10"
+        android:hint="Club Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/president_of_club"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/club_email" />
 
     <EditText
-        android:id="@+id/club_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="23dp"
-        android:ems="10"
-        android:hint="Club Name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/president_of_club"
-        app:layout_constraintStart_toStartOf="@+id/president_of_club"
-        app:layout_constraintTop_toBottomOf="@+id/club_password" />
-
-    <EditText
         android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="176dp"
+        android:layout_width="210dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="283dp"
+        android:background="#FF0"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Club description"
@@ -61,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="19dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="33dp"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,14 +62,38 @@
 
     <EditText
         android:id="@+id/president_of_club"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="210dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        android:background="#FD0"
         android:ems="10"
         android:hint="President of Club"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/description"
-        app:layout_constraintEnd_toEndOf="@+id/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/club_name" />
+
+    <Button
+        android:id="@+id/uploadGroupAvatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="395dp"
+        android:layout_marginBottom="57dp"
+        android:text="Upload"
+        app:layout_constraintBottom_toTopOf="@+id/clubAvatar"
+        app:layout_constraintEnd_toEndOf="@+id/description"
+        app:layout_constraintStart_toStartOf="@+id/description"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/clubAvatar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="81dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadGroupAvatar"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
