@@ -19,15 +19,24 @@ import com.bumptech.glide.Glide;
 import com.example.nu_app.Club;
 import com.example.nu_app.ListOfClubs;
 import com.example.nu_app.R;
+import com.example.nu_app.Student;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
@@ -49,16 +58,19 @@ public class ClubAdapter extends ArrayAdapter {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         if(convertView == null) {
             convertView = inflater.inflate(R.layout.row_clubs, null);
         }
 
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         ImageView clubIcon;
         TextView clubName;
         TextView clubDescription;
-        Button subscribeButton;
+        final Button subscribeButton;
+        final List<String> subscribedClubs = new ArrayList<String>();
 
         clubIcon = convertView.findViewById(R.id.clubIcon);
         clubName = convertView.findViewById(R.id.clubName);
@@ -84,6 +96,59 @@ public class ClubAdapter extends ArrayAdapter {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
+            }
+        });
+
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students").child(user.getEmail().replace("@nu.edu.kz", "").replace(".", "_"));
+        reference.child("subscriptions").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    subscribedClubs.add(childSnapshot.getValue().toString());
+
+                    if(childSnapshot.getValue().equals(clubModelList.get(position).getName())) {
+                        subscribeButton.setText("✓");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        subscribeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Student student = dataSnapshot.getValue(Student.class);
+
+                        if(subscribeButton.getText().equals("✓")) {
+                            student.cancelSubsription(clubModelList.get(position).getName());
+                            reference.setValue(student);
+
+                            subscribeButton.setText("+");
+
+                        } else if (subscribeButton.getText().equals("+")) {
+
+                            student.addSubscription(clubModelList.get(position).getName());
+                            reference.setValue(student);
+
+                            subscribeButton.setText("✓");
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 

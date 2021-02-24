@@ -1,8 +1,11 @@
 package com.example.nu_app;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student {
     String email, name, major;
-    String[] subscriptions;
+    List<String> subscriptions = new ArrayList<String>();
 
     public Student() {
     }
@@ -11,7 +14,6 @@ public class Student {
         this.email = email;
         this.name = name;
         this.major = major;
-
     }
 
     public String getEmail() {
@@ -22,6 +24,7 @@ public class Student {
         this.email = email;
     }
 
+
     public String getName() {
         return name;
     }
@@ -29,6 +32,7 @@ public class Student {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public String getMajor() {
         return major;
@@ -38,15 +42,20 @@ public class Student {
         this.major = major;
     }
 
-    public String[] getSubscriptions() {
+
+    public List<String> getSubscriptions() {
         return subscriptions;
     }
 
-    public void setSubscriptions(String[] subscriptions) {
+    public void setSubscriptions(List<String> subscriptions) {
         this.subscriptions = subscriptions;
     }
 
-    public void addSubscription(String club){
-        subscriptions[subscriptions.length + 1] = club;
+    public void addSubscription(String club) {
+        subscriptions.add(club);
+    }
+
+    public void cancelSubsription(String club) {
+        subscriptions.remove(club);
     }
 }

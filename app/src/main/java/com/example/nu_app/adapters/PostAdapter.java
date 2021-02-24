@@ -106,7 +106,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
 
     private void authorInfo(final String email, final TextView name)
     {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students").child("aiymkhan_kenessova");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students").child(user.getEmail().replace("@nu.edu.kz", "").replace(".", "_"));
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
