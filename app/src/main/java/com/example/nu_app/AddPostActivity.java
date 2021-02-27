@@ -59,6 +59,7 @@ public class AddPostActivity extends AppCompatActivity {
     private String randomKey;
     public Uri imageUri;
     private StorageTask uploadTask;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,35 +85,40 @@ public class AddPostActivity extends AppCompatActivity {
 
         post = FirebaseDatabase.getInstance().getReference().child("posts");
 
-        club = FirebaseDatabase.getInstance().getReference().child("clubs");
-        final String clubEmail = pAuth.getEmail();
-        final String[] author = new String[1];
-
-        club.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds: dataSnapshot.getChildren())
-                {
-                    Club clubName = ds.getValue(Club.class);
-                    if(clubName.email == clubEmail){
-
-                         author[0] = clubName.name;
-                    }
 
 
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                savePost(title, date, location, description, author[0]);
+                final String clubEmail = pAuth.getEmail();
+
+                club = FirebaseDatabase.getInstance().getReference().child("clubs");
+
+                club.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String author = null;
+                        for(DataSnapshot ds: dataSnapshot.getChildren())
+                        {
+
+                            Club clubName = ds.getValue(Club.class);
+                            if(clubName.email.equals(clubEmail)){
+                                author = clubName.name;
+                                savePost(title, date, location, description, author);
+                            }
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
             }
         });
 

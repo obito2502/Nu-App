@@ -123,6 +123,7 @@ public class HomeFragment extends Fragment {
                 }
 
                 postAdapter = new PostAdapter(getContext(), postList);
+                System.out.println(postList.toString());
                 recyclerView.setAdapter(postAdapter);
 
             }
