@@ -1,30 +1,33 @@
 package com.example.nu_app.models;
 
+import android.net.Uri;
+
+import java.util.Date;
+
 public class Post {
 
-    private String author, title, date, location, description;
-    private int postId;
+    private String author, title, date, location, description, imageLink;
+    private long time;
 
     public Post() {
 
     }
 
-    public Post(String date, String title, String description, String location, int postId, String author) {
-        this.postId = postId;
+    public Post(String title, String date,  String location, String description, String author, String imageLink) {
+
         this.author = author;
         this.title = title;
         this.date = date;
         this.location = location;
         this.description = description;
+        this.time = new Date().getTime();
+        this.imageLink = imageLink;
     }
 
-    public int getPostId() {
-        return postId;
-    }
 
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
+    public long getTime() {return time;}
+
+    public void setTime(long time) {this.time = time;}
 
     public String getAuthor() {
         return author;
@@ -64,5 +67,14 @@ public class Post {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 }

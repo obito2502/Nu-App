@@ -1,9 +1,8 @@
 package com.example.nu_app.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +16,10 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.example.nu_app.Club;
-import com.example.nu_app.ListOfClubs;
 import com.example.nu_app.R;
 import com.example.nu_app.Student;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -72,7 +69,6 @@ public class ClubAdapter extends ArrayAdapter {
         final Button subscribeButton;
         final List<String> subscribedClubs = new ArrayList<String>();
 
-        clubIcon = convertView.findViewById(R.id.clubIcon);
         clubName = convertView.findViewById(R.id.clubName);
         clubDescription = convertView.findViewById(R.id.clubDescription);
         subscribeButton = convertView.findViewById(R.id.subscribeButton);

@@ -21,8 +21,8 @@
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-                android:id="@+id/uPictureIv"
+<ImageView
+                android:id="@+id/club_icon"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/common_google_signin_btn_icon_dark" />
@@ -82,6 +82,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autoLink="all"
+            />
+        <ImageView
+            android:id="@+id/poster"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
             />
 
 
