@@ -1,6 +1,8 @@
 package com.example.nu_app;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -28,19 +30,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
+import android.text.InputType;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.UUID;
 import com.squareup.picasso.Picasso;
 
@@ -68,10 +77,12 @@ public class AddPostActivity extends AppCompatActivity {
 
 
         final EditText title = findViewById(R.id.event_name);
-        final EditText date = findViewById(R.id.event_date);
+        final EditText date_time = findViewById(R.id.event_date_time);
         final EditText location = findViewById(R.id.event_location);
         final EditText description = findViewById(R.id.event_description);
 
+
+        date_time.setInputType(InputType.TYPE_NULL);
 
         Button saveBtn = findViewById(R.id.save_event);
 
@@ -85,7 +96,12 @@ public class AddPostActivity extends AppCompatActivity {
 
         post = FirebaseDatabase.getInstance().getReference().child("posts");
 
-
+        date_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDateTimeDialog(date_time);
+            }
+        });
 
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -101,17 +117,13 @@ public class AddPostActivity extends AppCompatActivity {
                         String author = null;
                         for(DataSnapshot ds: dataSnapshot.getChildren())
                         {
-
                             Club clubName = ds.getValue(Club.class);
                             if(clubName.email.equals(clubEmail)){
                                 author = clubName.name;
-                                savePost(title, date, location, description, author);
+                                savePost(title, date_time, location, description, author);
                             }
-
-
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -128,6 +140,34 @@ public class AddPostActivity extends AppCompatActivity {
                 chooseImage();
             }
         });
+    }
+
+    private void showDateTimeDialog(final EditText date_time) {
+        final Calendar calendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                        calendar.set(Calendar.HOUR, hour);
+                        calendar.set(Calendar.MINUTE, minute);
+
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, d MMM YYYY, HH:mm");
+                        date_time.setText(simpleDateFormat.format(calendar.getTime()));
+                    }
+                };
+
+                new TimePickerDialog(AddPostActivity.this, timeSetListener, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE),true).show();
+            }
+        };
+
+        new DatePickerDialog(AddPostActivity.this,dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
 
@@ -211,5 +251,6 @@ public class AddPostActivity extends AppCompatActivity {
 
         }
     }
+
 
 }
