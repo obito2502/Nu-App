@@ -157,7 +157,7 @@ public class AddPostActivity extends AppCompatActivity {
                         calendar.set(Calendar.HOUR, hour);
                         calendar.set(Calendar.MINUTE, minute);
 
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, d MMM YYYY, HH:mm");
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm");
                         date_time.setText(simpleDateFormat.format(calendar.getTime()));
                     }
                 };
