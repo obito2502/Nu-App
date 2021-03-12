@@ -157,12 +157,12 @@ public class AddPostActivity extends AppCompatActivity {
                         calendar.set(Calendar.HOUR, hour);
                         calendar.set(Calendar.MINUTE, minute);
 
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm");
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
                         date_time.setText(simpleDateFormat.format(calendar.getTime()));
                     }
                 };
 
-                new TimePickerDialog(AddPostActivity.this, timeSetListener, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE),true).show();
+                new TimePickerDialog(AddPostActivity.this, timeSetListener, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE),false).show();
             }
         };
 
