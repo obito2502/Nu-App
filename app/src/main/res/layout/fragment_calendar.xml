@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".CalendarFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <org.naishadhparmar.zcustomcalendar.CustomCalendar
+        android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Calendar Page"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:textSize="30sp" />
+
+        />
+
+
 
 </FrameLayout>

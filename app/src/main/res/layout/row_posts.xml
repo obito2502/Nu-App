@@ -89,6 +89,12 @@
             android:layout_height="200dp"
             />
 
+        <Button
+            android:id="@+id/selectEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add" />
+
 
     </LinearLayout>
 

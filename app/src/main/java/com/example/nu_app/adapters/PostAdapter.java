@@ -7,6 +7,7 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -42,7 +44,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
     StorageReference ref;
     StorageReference clubRef;
 
-
+    final List<String> selectedEvents = new ArrayList<String>();
 //    private FirebaseUser firebaseUser;
 
 
@@ -64,7 +66,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
 
 //        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        Post post = postList.get(i);
+        final Post post = postList.get(i);
+
 
 //        authorInfo(post.getAuthor(), myHolder.author);
 
@@ -92,6 +95,58 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
             }
         });
 
+        //Reference for getting selected posts variable from firebase database
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students").child(user.getEmail().replace("@nu.edu.kz", "").replace(".", "_"));
+
+        reference.child("selectedEvents").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+
+                    if(childSnapshot.getValue().equals(post.getTitle())) {
+                        myHolder.selectEvent.setText("Delete");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        myHolder.selectEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Student student = dataSnapshot.getValue(Student.class);
+
+                        if(myHolder.selectEvent.getText().equals("Delete")) {
+                            student.cancelSelectedEvent(post.getTitle());
+
+                            reference.setValue(student);
+
+                            myHolder.selectEvent.setText("Add");
+
+                        } else  if(myHolder.selectEvent.getText().equals("Add")) {
+                            student.addSelectedEvent(post.getTitle());
+
+                            reference.setValue(student);
+
+                            myHolder.selectEvent.setText("Delete");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
 
     }
 
@@ -105,10 +160,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
         // from row_post.xml
         TextView author, postTitle, postDate, postLocation, postDescription, postTime;
         ImageView clubIcon, poster;
+        Button selectEvent;
 
 
 
         public MyHolder(@NonNull View itemView) {
+
             super(itemView);
             author = itemView.findViewById(R.id.author);
             postTitle = itemView.findViewById(R.id.postTitle);
@@ -118,7 +175,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyHolder> {
             postTime = itemView.findViewById(R.id.postedTime);
             poster = itemView.findViewById(R.id.poster);
             clubIcon = itemView.findViewById(R.id.club_icon);
-
+            selectEvent = itemView.findViewById(R.id.selectEvent);
 
         }
 

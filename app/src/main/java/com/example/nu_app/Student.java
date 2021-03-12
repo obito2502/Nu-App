@@ -6,6 +6,7 @@ import java.util.List;
 public class Student {
     String email, name, major;
     List<String> subscriptions = new ArrayList<String>();
+    List<String> selectedEvents = new ArrayList<String>();
 
     public Student() {
     }
@@ -58,4 +59,16 @@ public class Student {
     public void cancelSubsription(String club) {
         subscriptions.remove(club);
     }
+
+
+    public List<String> getSelectedEvents() { return selectedEvents;}
+
+    public void setSelectedEvents(List<String> selectedEvents) {this.selectedEvents = selectedEvents;}
+
+    public void addSelectedEvent(String event) { selectedEvents.add(event);}
+
+    public void cancelSelectedEvent(String event) { selectedEvents.remove(event); }
+
+
+
 }
