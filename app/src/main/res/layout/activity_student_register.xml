@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_color"
     tools:context=".StudentRegisterActivity">
 
     <TextView
@@ -11,7 +12,9 @@
         android:layout_width="192dp"
         android:layout_height="48dp"
         android:layout_marginTop="136dp"
-        android:text="TextView"
+        android:text="  TextView"
+        android:gravity="start|center"
+        android:background="@drawable/add_post_edit_evname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +28,9 @@
         android:layout_marginTop="73dp"
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="72dp"
-        android:text="TextView"
+        android:background="@drawable/add_post_edit_evname"
+        android:text="  TextView"
+        android:gravity="start|center"
         app:layout_constraintBottom_toBottomOf="@+id/student_name"
         app:layout_constraintEnd_toEndOf="@+id/student_name"
         app:layout_constraintStart_toStartOf="@+id/student_name"
@@ -33,11 +38,13 @@
 
     <EditText
         android:id="@+id/student_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
         android:layout_marginTop="97dp"
         android:ems="10"
-        android:hint="Name and Surname"
+        android:hint="  Name and Surname"
+        android:gravity="start|center"
+        android:background="@drawable/add_post_edit_evname"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,12 +52,14 @@
 
     <EditText
         android:id="@+id/student_major"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
         android:layout_marginTop="21dp"
         android:ems="10"
-        android:hint="Major"
+        android:hint="  Major"
+        android:gravity="start|center"
         android:inputType="textPersonName"
+        android:background="@drawable/add_post_edit_evname"
         app:layout_constraintStart_toStartOf="@+id/student_name"
         app:layout_constraintTop_toBottomOf="@+id/student_name" />
 
@@ -58,8 +67,9 @@
         android:id="@+id/student_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/add_post_upload"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

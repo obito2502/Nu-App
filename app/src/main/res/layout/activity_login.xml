@@ -4,48 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".LoginActivity">
 
     <EditText
         android:id="@+id/email_text"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:layout_marginStart="101dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginBottom="34dp"
+        android:layout_marginBottom="25dp"
         android:ems="10"
-        android:hint="NU email"
+        android:hint="  NU email"
+        android:textColorHint="@color/white"
         android:inputType="textPersonName"
+        android:gravity="start|center"
+        android:background="@drawable/login_style"
         app:layout_constraintBottom_toTopOf="@+id/password_text"
         app:layout_constraintEnd_toStartOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/password_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="240dp"
         android:ems="10"
-        android:hint="Password"
+        android:textColorHint="@color/white"
+        android:hint="  Password"
+        android:gravity="start|center"
         android:inputType="textPassword"
+        android:background="@drawable/login_style"
         app:layout_constraintStart_toStartOf="@+id/email_text"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="45dp"
+        android:background="@drawable/add_post_upload"
         android:text="Sign in"
+        android:textColor="@color/main_color"
         app:layout_constraintBaseline_toBaselineOf="@+id/register_button"
         app:layout_constraintStart_toStartOf="@+id/password_text" />
 
     <Button
         android:id="@+id/register_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="37dp"
+        android:layout_width="110dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/add_post_upload"
         android:text="Register"
+        android:textColor="@color/main_color"
         app:layout_constraintStart_toEndOf="@+id/sign_in_button"
         app:layout_constraintTop_toBottomOf="@+id/password_text" />
 
@@ -54,8 +65,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
-        android:text="@nu.edu.kz"
-        android:textSize="18sp"
+        android:text=" @nu.edu.kz"
+        android:textSize="21sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/email_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/email_text" />
