@@ -8,10 +8,32 @@
     <org.naishadhparmar.zcustomcalendar.CustomCalendar
         android:id="@+id/calendar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="317dp"
 
-        />
+        >
 
+    </org.naishadhparmar.zcustomcalendar.CustomCalendar>
+
+    <TextView
+        android:id="@+id/event_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/event_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/event_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:layout_weight="1" />
 
 
 </FrameLayout>

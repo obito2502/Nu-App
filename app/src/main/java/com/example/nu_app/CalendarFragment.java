@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.nu_app.adapters.PostAdapter;
 import com.example.nu_app.models.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,16 +21,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.naishadhparmar.zcustomcalendar.CustomCalendar;
+import org.naishadhparmar.zcustomcalendar.OnDateSelectedListener;
 import org.naishadhparmar.zcustomcalendar.Property;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 
 public class CalendarFragment extends Fragment {
     CustomCalendar calendar;
+    ArrayList<Post> events = new ArrayList<>();
+
+    private TextView event_title;
+    private TextView event_place;
+    private TextView event_date;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -43,10 +53,14 @@ public class CalendarFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         View view =  inflater.inflate(R.layout.fragment_calendar, container, false);
+
+        event_title = view.findViewById(R.id.event_title);
+        event_date = view.findViewById(R.id.event_date);
+        event_place = view.findViewById(R.id.event_place);
 
         calendar = view.findViewById(R.id.calendar);
         HashMap<Object, Property> descHashMap = new HashMap<>();
@@ -72,6 +86,7 @@ public class CalendarFragment extends Fragment {
         final HashMap<Integer, Object> dates = new HashMap<>();
         final Calendar calendarOf = Calendar.getInstance();
         dates.put(calendarOf.get(Calendar.DAY_OF_MONTH), "current");
+        calendar.setDate(calendarOf, dates);
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students").child(user.getEmail().replace("@nu.edu.kz", "").replace(".", "_"));
@@ -81,8 +96,6 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (final DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
-                    System.out.println("First one = " + childSnapshot.getValue());
-
 
                     eventsReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -90,13 +103,16 @@ public class CalendarFragment extends Fragment {
                             for(DataSnapshot eventChild: dataSnapshot2.getChildren()) {
                                 Post postChecker = eventChild.getValue(Post.class);
 
-                                if (childSnapshot.getValue().equals(postChecker.getTitle())) {
-                                    System.out.println("Yeahhhh, sovpadenie = = " + postChecker.getDate().substring(5,7));
+                                if(childSnapshot.getValue().equals(postChecker.getTitle())) {
+                                    final Integer date_of_event = Integer.parseInt(postChecker.getDate().substring(0,2));
 
-                                    dates.put(9, "event");
-                                    dates.put(10, "event");
+                                    dates.put(date_of_event, "event");
                                     calendar.setDate(calendarOf, dates);
+
+                                    events.add(postChecker);
                                 }
+
+                                calendar.setDate(calendarOf, dates);
 
                             }
                         }
@@ -115,6 +131,26 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        calendar.setOnDateSelectedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(View view, Calendar selectedDate, Object desc) {
+                String selectedDay = selectedDate.getTime().toString().substring(8,10);
+
+                for (Post e: events) {
+
+                    if(e.getDate().substring(0,2).equals(selectedDay)) {
+                        event_title.setText(e.getTitle());
+                        event_date.setText(e.getDate());
+                        event_place.setText(e.getLocation());
+                        break;
+                    }
+                    event_title.setText("");
+                    event_date.setText("");
+                    event_place.setText("");
+                }
             }
         });
 
