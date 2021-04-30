@@ -4,6 +4,9 @@ public class Application {
 
     private String name, surname, email, club, occupation, motivation, reason, phone;
 
+    public Application() {
+
+    }
     public Application(String name, String surname, String email, String club, String occupation, String motivation, String reason, String phone) {
         this.name = name;
         this.surname = surname;
