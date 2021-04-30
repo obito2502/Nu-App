@@ -2,15 +2,6 @@ package com.example.nu_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,9 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.nu_app.adapters.PostAdapter;
 import com.example.nu_app.models.Post;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,13 +37,14 @@ public class HomeFragment extends Fragment {
 
     FirebaseAuth firebaseAuth;
     private DatabaseReference databaseRef;
-
+    private FirebaseUser user;
     private RecyclerView recyclerView;
     private List<Post> postList;
     PostAdapter postAdapter;
+    public DatabaseReference reference;
 
     private List<String> followingList;
-    ActionBar actionBar;
+    private String login;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -66,7 +64,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         //recycler view and its properties
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
 
         recyclerView = view.findViewById(R.id.postsRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -77,25 +76,46 @@ public class HomeFragment extends Fragment {
 
         //set layout to recyclerview
         recyclerView.setLayoutManager(layoutManager);
-
+        login = user.getEmail().replaceAll("\\.", "_");
+        login = login.substring(0, login.indexOf("@"));
         //init post list
 
+        reference = FirebaseDatabase.getInstance().getReference();
 
         loadPosts();
         return view;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(final Menu menu, MenuInflater inflater) {
         // Inflate the menu items for use in the action bar
         inflater.inflate(R.menu.menu_main, menu);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    if (childSnapshot.hasChild(login)) {
+                        if (!childSnapshot.getKey().equals("clubs")) {
+                            menu.findItem(R.id.add_post).setVisible(false);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.add_post){
+
+
+        if (id == R.id.add_post) {
             Intent addPost = new Intent(getActivity(), AddPostActivity.class);
             startActivity(addPost);
 
@@ -116,8 +136,7 @@ public class HomeFragment extends Fragment {
 
                 postList = new ArrayList<>();
 
-                for(DataSnapshot ds: dataSnapshot.getChildren())
-                {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Post post = ds.getValue(Post.class);
                     postList.add(post);
                 }

@@ -58,4 +58,11 @@
         android:visibility="gone"
         android:text="Apply" />
 
+    <Button
+        android:id="@+id/appplicationsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Applications" />
+
 </FrameLayout>

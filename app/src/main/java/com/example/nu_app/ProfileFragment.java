@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.nu_app.models.Application;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -67,6 +68,7 @@ public class ProfileFragment extends Fragment {
 
         final Button add_club_button = (Button)view.findViewById(R.id.add_club_button);
         final Button apply_button = (Button)view.findViewById(R.id.applyButton);
+        final Button applications_btn = (Button) view.findViewById(R.id.appplicationsButton);
 
         login = user.getEmail().replaceAll("\\.", "_");
         login = login.substring(0, login.indexOf("@"));
@@ -81,9 +83,12 @@ public class ProfileFragment extends Fragment {
                         if(childSnapshot.getKey().equals("students")) {
                             add_club_button.setVisibility(View.VISIBLE);
                             apply_button.setVisibility(View.VISIBLE);
+                            applications_btn.setVisibility(View.GONE);
                             condition.setText("I Am Student");
                             textOption.setText("My subscriptions: adilya the best, kvn, chess");
                         } else if (childSnapshot.getKey().equals("clubs")){
+                            applications_btn.setVisibility(View.VISIBLE);
+                            apply_button.setVisibility(View.GONE);
                             condition.setText("I am Club");
                             textOption.setText("number of followers: 1");
                         }
@@ -108,6 +113,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent apply = new Intent(getActivity(), Recruitment.class);
+                startActivity(apply);
+            }
+        });
+
+        applications_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent apply = new Intent(getActivity(), ApplicationActivity.class);
                 startActivity(apply);
             }
         });
