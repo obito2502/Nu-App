@@ -69,6 +69,7 @@ public class ProfileFragment extends Fragment {
         final Button add_club_button = (Button)view.findViewById(R.id.add_club_button);
         final Button apply_button = (Button)view.findViewById(R.id.applyButton);
         final Button applications_btn = (Button) view.findViewById(R.id.appplicationsButton);
+        final Button members_btn = (Button) view.findViewById(R.id.membersButton);
 
         login = user.getEmail().replaceAll("\\.", "_");
         login = login.substring(0, login.indexOf("@"));
@@ -89,6 +90,7 @@ public class ProfileFragment extends Fragment {
                         } else if (childSnapshot.getKey().equals("clubs")){
                             applications_btn.setVisibility(View.VISIBLE);
                             apply_button.setVisibility(View.GONE);
+                            members_btn.setVisibility(View.VISIBLE);
                             condition.setText("I am Club");
                             textOption.setText("number of followers: 1");
                         }
@@ -124,6 +126,15 @@ public class ProfileFragment extends Fragment {
                 startActivity(apply);
             }
         });
+        members_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent apply = new Intent(getActivity(), MembersActivity.class);
+                startActivity(apply);
+            }
+        });
+
+
         return view;
     }
 
