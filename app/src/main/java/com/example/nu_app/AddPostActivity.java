@@ -114,7 +114,7 @@ public class AddPostActivity extends AppCompatActivity {
                 club.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String author = null;
+                        String author;
                         for(DataSnapshot ds: dataSnapshot.getChildren())
                         {
                             Club clubName = ds.getValue(Club.class);
@@ -196,11 +196,6 @@ public class AddPostActivity extends AppCompatActivity {
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri));
     }
-
-
-
-
-
 
     private void savePost(EditText title, EditText date, EditText location, EditText description, final String club){
         if(uploadTask != null && uploadTask.isInProgress()) {

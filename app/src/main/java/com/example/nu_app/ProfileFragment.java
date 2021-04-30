@@ -66,6 +66,8 @@ public class ProfileFragment extends Fragment {
         });
 
         final Button add_club_button = (Button)view.findViewById(R.id.add_club_button);
+        final Button apply_button = (Button)view.findViewById(R.id.applyButton);
+
         login = user.getEmail().replaceAll("\\.", "_");
         login = login.substring(0, login.indexOf("@"));
 
@@ -78,6 +80,7 @@ public class ProfileFragment extends Fragment {
                     if(childSnapshot.hasChild(login)){
                         if(childSnapshot.getKey().equals("students")) {
                             add_club_button.setVisibility(View.VISIBLE);
+                            apply_button.setVisibility(View.VISIBLE);
                             condition.setText("I Am Student");
                             textOption.setText("My subscriptions: adilya the best, kvn, chess");
                         } else if (childSnapshot.getKey().equals("clubs")){
@@ -101,7 +104,13 @@ public class ProfileFragment extends Fragment {
                 startActivity(addClub);
             }
         });
-
+        apply_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent apply = new Intent(getActivity(), Recruitment.class);
+                startActivity(apply);
+            }
+        });
         return view;
     }
 

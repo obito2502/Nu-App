@@ -21,6 +21,10 @@
             android:name=".AddPostActivity"
             android:label="@string/title_activity_add_post"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Recruitment"
+            android:label="Club Member Recruitment"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ListOfClubs" />
         <activity android:name=".StudentRegisterActivity" />
         <activity android:name=".ClubRegisterActivity" />
