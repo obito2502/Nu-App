@@ -22,6 +22,7 @@ public class Member implements Parcelable {
     protected Member (Parcel in) {
         firstName = in.readString();
         lastName = in.readString();
+        occupation = in.readString();
     }
 
     public static final Creator<Member> CREATOR = new Creator<Member>() {
@@ -53,11 +54,11 @@ public class Member implements Parcelable {
     }
 
     public String getOccupation() {
-        return lastName;
+        return occupation;
     }
 
-    public void setOccupation(String lastName) {
-        this.lastName = lastName;
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 
     @Override
@@ -69,5 +70,6 @@ public class Member implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(firstName);
         dest.writeString(lastName);
+        dest.writeString(occupation);
     }
 }
